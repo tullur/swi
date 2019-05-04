@@ -47,7 +47,7 @@ func XMLtoJSON(name string) {
 				}
 			}
 		}
-
-		utils.WriteJSON("output", resultData)
 	}
+
+	utils.WriteJSON("output", resultData)
 }
