@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"swi/source/parser"
+)
 
 func main() {
-	fmt.Println("Hello, World!")
+	parser.XMLtoJSON("input")
 }
