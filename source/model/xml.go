@@ -2,16 +2,16 @@ package model
 
 import "encoding/xml"
 
-// XMLObject ->
+// XMLObject desribe xml Object node
 type XMLObject struct {
 	XMLName    xml.Name   `xml:"object"`
-	ObjectName string     `xml:"obj_name,omitempty"`
-	Fields     []XMLField `xml:"field,omitempty"`
+	ObjectName string     `xml:"obj_name"`
+	Fields     []XMLField `xml:"field"`
 }
 
-// XMLField ->
+// XMLField describe xml Field node
 type XMLField struct {
-	Name  string `xml:"name,omitempty"`
-	Type  string `xml:"type,omitempty"`
-	Value string `xml:"value,omitempty"`
+	Name  string `xml:"name"`
+	Type  string `xml:"type"`
+	Value string `xml:"value"`
 }
