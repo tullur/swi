@@ -25,15 +25,17 @@ func XMLtoJSON(name string) map[string]map[string]interface{} {
 
 	for {
 		// read tokens from xml
-		t, err := decoder.Token()
-		util.CheckError(err)
+		t, _ := decoder.Token()
+		// util.CheckError(err)
 		if t == nil {
 			break
 		}
-		object := model.XMLObject{}
+		object := &model.XMLObject{}
 
 		//  inspect token type
 		switch se := t.(type) {
+		case xml.SyntaxError:
+			decoder.Skip()
 		case xml.StartElement:
 			// if StartElement token has name object
 			if se.Name.Local == "object" {
