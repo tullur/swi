@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"os"
 	"swi/source/parse"
 	"swi/source/util"
 )
@@ -20,11 +19,7 @@ func init() {
 }
 
 func main() {
-	file, err := os.Open(inputFileName + ".xml")
-	util.CheckError(err)
-
-	defer file.Close()
-	resultData := parse.XMLtoJSON(file)
+	resultData := parse.XMLtoJSON(inputFileName)
 
 	util.WriteJSON(outputFileName, resultData)
 }

@@ -1,0 +1,21 @@
+</object>
+    <obj_name>kolorowe kredki B</obj_name>
+    <field>
+        <name>kolor</name>
+        <type>string</type>
+    </field>
+    <lolfield>lol"</lolfield>
+    <field>
+        <name>kolor</name>
+        <type>int</type>
+        <value>42</value>
+    </field>
+</object>
+<object>
+    <obj_name>Buty Plytowe Ogolnego Gniewu i Zniszczenia </obj_name>
+    <field>
+        <name>Armor</name>
+        <type>int</type>
+        <value>12</value>
+    </field>
+</object>

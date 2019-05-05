@@ -8,8 +8,18 @@ import (
 	"swi/source/util"
 )
 
+func readXMLFile(fileName string) *os.File {
+	file, err := os.Open(fileName + ".xml")
+	util.CheckError(err)
+
+	return file
+}
+
 // XMLtoJSON decode xml file and returns decoded data
-func XMLtoJSON(file *os.File) map[string]map[string]interface{} {
+func XMLtoJSON(name string) map[string]map[string]interface{} {
+	file := readXMLFile(name)
+	defer file.Close()
+
 	decoder := *xml.NewDecoder(file)
 	resultData := map[string]map[string]interface{}{}
 
