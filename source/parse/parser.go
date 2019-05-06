@@ -3,6 +3,7 @@ package parse
 import (
 	"encoding/xml"
 	"io"
+	"log"
 	"os"
 	"strconv"
 	"swi/source/model"
@@ -34,6 +35,7 @@ func XMLtoJSON(name string) map[string]map[string]interface{} {
 			if err == io.EOF {
 				break
 			} else {
+				log.Println(err)
 				break
 			}
 		}
@@ -60,7 +62,7 @@ func XMLtoJSON(name string) map[string]map[string]interface{} {
 						case "string":
 							resultData[object.ObjectName][val.Name] = val.Value
 						default:
-							resultData[object.ObjectName][val.Name] = "Incorrect Data Type"
+							delete(resultData[object.ObjectName], val.Value)
 						}
 					}
 				}
