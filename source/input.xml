@@ -1,5 +1,5 @@
 <object>
-    <obj_name>hero_profile 1</obj_name>
+    <obj_name>hero_profile 1 </obj_name>
     <field>
         <name>favorite_fruit</name>
         <type>string</type>
