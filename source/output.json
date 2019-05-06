@@ -1,7 +1,4 @@
 {
-	"Buty Plytowe Ogolnego Gniewu i Zniszczenia ": {
-		"Armor": 12
-	},
 	"hero_profile 1": {
 		"age": 32,
 		"favorite_fruit": "Truskawa",
@@ -16,6 +13,6 @@
 		"kolor": "fuksja"
 	},
 	"kolorowe kredki B": {
-		"kolor": 42
+		"kolor": ""
 	}
 }

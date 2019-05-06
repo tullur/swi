@@ -12,6 +12,5 @@ func WriteJSON(name string, data map[string]map[string]interface{}) {
 
 	result, err := json.MarshalIndent(data, "", "\t")
 	CheckError(err)
-
 	f.Write(result)
 }

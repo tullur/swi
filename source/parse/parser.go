@@ -2,6 +2,7 @@ package parse
 
 import (
 	"encoding/xml"
+	"io"
 	"os"
 	"strconv"
 	"swi/source/model"
@@ -20,20 +21,24 @@ func XMLtoJSON(name string) map[string]map[string]interface{} {
 	file := readXMLFile(name)
 	defer file.Close()
 
-	decoder := *xml.NewDecoder(file)
+	decoder := xml.NewDecoder(file)
 	resultData := map[string]map[string]interface{}{}
+	decoder.Strict = false
 
 	for {
-		// read tokens from xml
-		t, err := decoder.Token()
-		util.CheckError(err)
-		if t == nil {
-			break
-		}
 		object := model.XMLObject{}
+		// read tokens from xml
+		token, err := decoder.Token()
 
+		if err != nil {
+			if err == io.EOF {
+				break
+			} else {
+				break
+			}
+		}
 		//  inspect token type
-		switch se := t.(type) {
+		switch se := token.(type) {
 		case xml.StartElement:
 			// if StartElement token has name object
 			if se.Name.Local == "object" {
