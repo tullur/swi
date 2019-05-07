@@ -26,14 +26,6 @@ func XMLtoJSON(name string) map[string]map[string]interface{} {
 	resultData := map[string]map[string]interface{}{}
 	decoder.Strict = false
 
-	// scanner := bufio.NewScanner(file)
-	// for scanner.Scan() {
-	// 	fmt.Println("Current line" + scanner.Text())
-	// }
-
-	// if err := scanner.Err(); err != nil {
-	// 	log.Fatal(err)
-	// }
 	for {
 		object := model.XMLObject{}
 		// read tokens from xml
