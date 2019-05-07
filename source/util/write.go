@@ -1,6 +1,7 @@
 package util
 
 import (
+	"bytes"
 	"encoding/json"
 	"os"
 )
@@ -11,7 +12,10 @@ func WriteJSON(name string, data map[string]map[string]interface{}) {
 	CheckError(err)
 
 	result, err := json.MarshalIndent(data, "", "\t")
-	CheckError(err)
+	result = bytes.Replace(result, []byte("\\u003c"), []byte("<"), -1)
+	result = bytes.Replace(result, []byte("\\u003e"), []byte(">"), -1)
+	result = bytes.Replace(result, []byte("\\u0026"), []byte("&"), -1)
 
+	CheckError(err)
 	f.Write(result)
 }
