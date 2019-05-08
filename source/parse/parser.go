@@ -94,9 +94,17 @@ func XMLtoJSON(name string) map[string]map[string]interface{} {
 						case "int":
 							intValue, err := strconv.ParseInt(val.Value, 0, 32)
 							util.CheckError(err)
-							resultData[object.ObjectName][val.Name] = intValue
+							if intValue != 0 {
+								resultData[object.ObjectName][val.Name] = intValue
+							} else {
+								delete(resultData[object.ObjectName], val.Value)
+							}
 						case "string":
-							resultData[object.ObjectName][val.Name] = val.Value
+							if val.Value != "" {
+								resultData[object.ObjectName][val.Name] = val.Value
+							} else {
+								delete(resultData[object.ObjectName], val.Value)
+							}
 						default:
 							delete(resultData[object.ObjectName], val.Value)
 						}

@@ -13,7 +13,7 @@
     <field>
         <name>age</name>
         <type>int</type>
-        <value>32</value>
+        <value>32</type>
     </field>
 </object>
 <object>
