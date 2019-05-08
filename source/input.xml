@@ -43,13 +43,13 @@
     </field>
 </object>
 <object>
-    <obj_name></obj_name>
+
 </object>
 <object>
     <obj_name>kolorowe kredki B</obj_name>
     <field>
-        <name>kolor</name>
-        <type>string</type>
+
+
     </field>
     <lolfield>lol"</lolfield>
     <field>

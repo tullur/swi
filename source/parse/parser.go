@@ -3,11 +3,15 @@ package parse
 import (
 	"encoding/xml"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"strconv"
+	"strings"
 	"swi/source/model"
 	"swi/source/util"
+
+	"github.com/dlclark/regexp2"
 )
 
 func readXMLFile(fileName string) *os.File {
@@ -17,8 +21,37 @@ func readXMLFile(fileName string) *os.File {
 	return file
 }
 
+// check element validity and rewrite input.xml
+func checkValidity(name string) {
+	input, err := ioutil.ReadFile(name + ".xml")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	lines := strings.Split(string(input), "\n")
+	re := regexp2.MustCompile(`(?<=<([A-Za-z].*?)>).+?(?=</(\1.*?)>)`, 0)
+
+	for i, line := range lines {
+		str := (strings.Replace(line, " ", "", -1))
+		// bad code
+		if str == "<object>" || str == "</object>" || str == "<field>" || str == "</field>" {
+
+		} else if isMatch, _ := re.MatchString(str); !isMatch {
+			line = ""
+			lines[i] = line
+		}
+	}
+
+	output := strings.Join(lines, "\n")
+	err = ioutil.WriteFile(name+".xml", []byte(output), 0644)
+	if err != nil {
+		log.Fatalln(err)
+	}
+}
+
 // XMLtoJSON decode xml file and returns decoded data
 func XMLtoJSON(name string) map[string]map[string]interface{} {
+	checkValidity(name)
 	file := readXMLFile(name)
 	defer file.Close()
 
