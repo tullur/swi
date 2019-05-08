@@ -3,6 +3,7 @@ package util
 import (
 	"bytes"
 	"encoding/json"
+	"log"
 	"os"
 )
 
@@ -18,4 +19,6 @@ func WriteJSON(name string, data map[string]map[string]interface{}) {
 
 	CheckError(err)
 	f.Write(result)
+
+	log.Println("Written to", name+".json")
 }

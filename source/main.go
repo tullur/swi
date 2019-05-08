@@ -14,7 +14,7 @@ const (
 // write logs to console/terminal
 func init() {
 	log.SetPrefix("LOG: ")
-	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+	log.SetFlags(log.Ldate | log.Ltime)
 	log.Println("SWI STARTED")
 }
 

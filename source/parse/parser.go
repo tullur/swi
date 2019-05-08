@@ -33,6 +33,7 @@ func XMLtoJSON(name string) map[string]map[string]interface{} {
 
 		if err != nil {
 			if err == io.EOF {
+				log.Println("Parsed")
 				break
 			} else {
 				log.Println(err)
