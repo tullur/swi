@@ -1,4 +1,4 @@
-<root>
+
     <object>
         <obj_name>hero_profile 1</obj_name>
         <field>
@@ -44,7 +44,7 @@
         </field>
     </object>
     <object>
-        <obj_name></obj_name>
+
     </object>
     <object>
         <obj_name>kolorowe kredki B</obj_name>
@@ -67,4 +67,3 @@
             <value>12</value>
         </field>
     </object>
-</root>

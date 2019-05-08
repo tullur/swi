@@ -23,27 +23,27 @@ func readXMLFile(fileName string) *os.File {
 
 // check element validity and rewrite input.xml
 func checkValidity(name string) {
-	input, err := ioutil.ReadFile(name + ".xml")
+	file := readXMLFile(name)
+	input, err := ioutil.ReadAll(file)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
 	lines := strings.Split(string(input), "\n")
-	re := regexp2.MustCompile(`(?<=<([A-Za-z].*?)>).+?(?=</(\1.*?)>)`, 0)
+	reObject := regexp2.MustCompile(`<\/*(object|field)>`, 0)
+	reField := regexp2.MustCompile(`(?<=<([A-Za-z].*?)>).+?(?=</(\1.*?)>)`, 0)
 
 	for i, line := range lines {
 		str := (strings.Replace(line, " ", "", -1))
-		// bad code
-		if str == "<object>" || str == "</object>" || str == "<field>" || str == "</field>" {
-
-		} else if isMatch, _ := re.MatchString(str); !isMatch {
-			line = ""
+		if isMatch, _ := reObject.MatchString(str); isMatch {
 			lines[i] = line
+		} else if isMatch, _ := reField.MatchString(str); !isMatch {
+			lines[i] = ""
 		}
 	}
 
 	output := strings.Join(lines, "\n")
-	err = ioutil.WriteFile(name+".xml", []byte(output), 0644)
+	err = ioutil.WriteFile("valid.xml", []byte(output), 0644)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -52,7 +52,9 @@ func checkValidity(name string) {
 // XMLtoJSON decode xml file and returns decoded data
 func XMLtoJSON(name string) map[string]map[string]interface{} {
 	checkValidity(name)
-	file := readXMLFile(name)
+	defer os.Remove("valid.xml")
+
+	file := readXMLFile("valid")
 	defer file.Close()
 
 	decoder := xml.NewDecoder(file)
